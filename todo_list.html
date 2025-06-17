@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, pink, blue);
+      margin: 0;
+    }
+
+    h1 {
+      background: linear-gradient(to bottom, #e91e63, #9c27b0);
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .input-section {
+      margin: 30px auto;
+      width: 80%;
+      background: #e91e63;
+      border: 5px solid white;
+      box-shadow: 0 0 20px #000;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    input[type="text"] {
+      width: 60%;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #000;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      color: white;
+      font-size: 1.2em;
+    }
+
+    li {
+      background: rgba(0,0,0,0.3);
+      margin: 5px auto;
+      padding: 10px;
+      width: 60%;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .delete-btn {
+      background: #ff4c4c;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Add Your To-Do List Item</h1>
+
+  <div class="input-section">
+    <input type="text" id="todo-input" placeholder="Enter Items">
+    <button id="add-btn">Add Item</button>
+  </div>
+
+  <ul id="todo-list"></ul>
+
+  <script>
+    $(document).ready(function () {
+      // Function to add a new item
+      $('#add-btn').click(function () {
+        const item = $('#todo-input').val().trim();
+        if (item !== '') {
+          const listItem = `
+            <li>
+              ${item}
+              <button class="delete-btn">Delete</button>
+            </li>
+          `;
+          $('#todo-list').append(listItem);
+          $('#todo-input').val('');  // Clear the input after adding
+        }
+      });
+
+      // Allow adding items with Enter key
+      $('#todo-input').keypress(function (e) {
+        if (e.which === 13) {
+          $('#add-btn').click();
+        }
+      });
+
+      // Function to delete an item
+      $(document).on('click', '.delete-btn', function () {
+        $(this).parent().remove();
+      });
+    });
+  </script>
+
+</body>
+</html>

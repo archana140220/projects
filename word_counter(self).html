@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typinng tool: word counter</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
+</head>
+<body>
+    <h2>typing tool: word counter</h2>
+    <textarea id="textInput" rows="10" cols="200"></textarea>
+    <p>Word count: <span id="WordCount">0</span></p>
+    <script>
+        $(document).ready(function (){
+            $("#textInput").on("input", function (){
+                var text = $(this).val();
+                var Words = text.trim().split(/\s+/).filter(Boolean).length;
+                $("#WordCount").text(Words);
+            });
+        });
+    </script>
+</body>
+</html>
